@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisFragment"
+    android:id="@+id/frameLayout_Regis">
+
+    <EditText
+        android:id="@+id/etRegisId"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_edittext"
+        android:hint="User Id"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"/>
+
+    <EditText
+        android:id="@+id/etRegisPswd"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"
+        android:inputType="textPassword"
+        android:background="@drawable/rounded_edittext"
+        android:hint="Password"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+    <EditText
+        android:id="@+id/etRegisConPswd"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"
+        android:inputType="textPassword"
+        android:background="@drawable/rounded_edittext"
+        android:hint="Confirm Password"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_size"
+        android:text="Register"
+        android:textAllCaps="true"
+        android:background="@drawable/rounded_btn"
+        android:layout_marginTop="400dp"
+        android:layout_marginLeft="90dp"
+        android:layout_marginRight="90dp"/>
+
+</FrameLayout>
