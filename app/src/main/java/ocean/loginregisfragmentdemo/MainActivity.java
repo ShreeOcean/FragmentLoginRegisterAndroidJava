@@ -31,16 +31,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         activityMainBinding.tvRegisLink.setOnClickListener(this);
         activityMainBinding.btnGoToLoginFragment.setOnClickListener(this);
 
+        replaceMainFrameToLoginFrag(new LoginFragment());
+
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btnGoToLoginFragment:
-                activityMainBinding.tvRegisLink.setVisibility(View.VISIBLE);
-                replaceMainFrameToLoginFrag(new LoginFragment());
-                activityMainBinding.btnGoToLoginFragment.setVisibility(View.GONE);
-                activityMainBinding.tvWelcomeNote.setVisibility(View.GONE);
+//                activityMainBinding.tvRegisLink.setVisibility(View.VISIBLE);
+//                replaceMainFrameToLoginFrag(new LoginFragment());
+//                activityMainBinding.btnGoToLoginFragment.setVisibility(View.GONE);
+//                activityMainBinding.tvWelcomeNote.setVisibility(View.GONE);
                 break;
             case R.id.tvRegisLink:
                 activityMainBinding.tvRegisLink.setVisibility(View.GONE);
@@ -67,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // create a FragmentTransaction to begin the transaction and replace the Fragment
         FragmentTransaction fragTransaction = fragmentManager.beginTransaction();
         // replace the FrameLayout with new Fragment
-        fragTransaction.replace(R.id.fragment_container_main_activity, loginFragment);
+        fragTransaction.add(R.id.fragment_container_main_activity, loginFragment);
         // save the changes
         fragTransaction.commit();
     }
