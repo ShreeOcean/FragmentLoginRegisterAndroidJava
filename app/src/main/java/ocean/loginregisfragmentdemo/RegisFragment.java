@@ -1,5 +1,7 @@
 package ocean.loginregisfragmentdemo;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,6 +24,9 @@ public class RegisFragment extends Fragment implements View.OnClickListener{
     View view;
     TextView tvLoginFragLink;
     Button btnRegister;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    private String userId, password;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,@NonNull ViewGroup container,
@@ -45,6 +50,9 @@ public class RegisFragment extends Fragment implements View.OnClickListener{
                 replaceRegisFragToLoginFrag(new LoginFragment());
                 break;
             case R.id.btnRegister:
+
+
+
                 break;
         }
     }

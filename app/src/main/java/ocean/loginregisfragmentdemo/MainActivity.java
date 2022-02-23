@@ -6,19 +6,29 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import ocean.loginregisfragmentdemo.databinding.ActivityMainBinding;
 import ocean.loginregisfragmentdemo.databinding.FragmentLoginBinding;
 import ocean.loginregisfragmentdemo.databinding.FragmentRegisBinding;
+import ocean.loginregisfragmentdemo.databinding.FragmentWelcomeBinding;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ActivityMainBinding activityMainBinding;
     private FragmentLoginBinding loginFragmentBinding;
     private FragmentRegisBinding regisFragmentBinding;
-    Context context;
+    private FragmentWelcomeBinding welcomeBinding;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
+    String userId, password;
 
 
     @Override
@@ -26,12 +36,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(activityMainBinding.getRoot());
-        context = this;
 
         activityMainBinding.tvRegisLink.setOnClickListener(this);
         activityMainBinding.btnGoToLoginFragment.setOnClickListener(this);
 
         replaceMainFrameToLoginFrag(new LoginFragment());
+
+        sharedPreferences = getSharedPreferences("login_register", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
     }
 
@@ -48,7 +60,51 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 activityMainBinding.tvRegisLink.setVisibility(View.GONE);
                 replaceMainFrameToRegisFrag(new RegisFragment());
                 break;
+
+            case R.id.btnRegister:
+
+                String conPassword = regisFragmentBinding.etRegisConPswd.getText().toString();
+
+                if (password != conPassword){
+                    Toast.makeText(this, "Confirm password doesn't match", Toast.LENGTH_SHORT).show();
+                }
+                if(TextUtils.isEmpty(userId)){
+                    regisFragmentBinding.etRegisId.setError("PLEASE ENTER USER ID");
+                    regisFragmentBinding.etRegisId.requestFocus();
+                    return;
+                }
+                if(TextUtils.isEmpty(password)){
+                    regisFragmentBinding.etRegisPswd.setError("PLEASE ENTER PASSWORD");
+                    regisFragmentBinding.etRegisPswd.requestFocus();
+                    return;
+                }
+                if(TextUtils.isEmpty(conPassword)){
+                    regisFragmentBinding.etRegisConPswd.setError("PLEASE ENTER CONFIRMED PASSWORD");
+                    regisFragmentBinding.etRegisConPswd.requestFocus();
+                    return;
+                }
+                if (userId != null && password != null && conPassword != null){
+                    regisThroughSharePref();
+                }
+
+                Log.d("Getting UserId and Password : ", "onClick: case R.id.btnRegister---->" + userId + "---->" + password);
+
+                break;
         }
+    }
+
+    private void regisThroughSharePref() {
+
+        editor.putString(Keys.USERID, regisFragmentBinding.etRegisId.getText().toString());
+        editor.putString(Keys.PASSWORD, regisFragmentBinding.etRegisPswd.getText().toString());
+        editor.apply();
+
+        userId = sharedPreferences.getString(Keys.USERID,"");
+        password = sharedPreferences.getString(Keys.PASSWORD, "");
+
+        Toast.makeText(this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+        replaceMainFrameToLoginFrag(new LoginFragment());
+
     }
 
     private void replaceMainFrameToRegisFrag(RegisFragment regisFragment) {
