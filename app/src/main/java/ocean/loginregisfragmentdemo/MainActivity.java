@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         replaceMainFrameToLoginFrag(new LoginFragment());
 
-        sharedPreferences = getSharedPreferences("login_register", Context.MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("login_register", MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
     }
@@ -61,51 +61,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 replaceMainFrameToRegisFrag(new RegisFragment());
                 break;
 
-            case R.id.btnRegister:
-
-                String conPassword = regisFragmentBinding.etRegisConPswd.getText().toString();
-
-                if (password != conPassword){
-                    Toast.makeText(this, "Confirm password doesn't match", Toast.LENGTH_SHORT).show();
-                }
-                if(TextUtils.isEmpty(userId)){
-                    regisFragmentBinding.etRegisId.setError("PLEASE ENTER USER ID");
-                    regisFragmentBinding.etRegisId.requestFocus();
-                    return;
-                }
-                if(TextUtils.isEmpty(password)){
-                    regisFragmentBinding.etRegisPswd.setError("PLEASE ENTER PASSWORD");
-                    regisFragmentBinding.etRegisPswd.requestFocus();
-                    return;
-                }
-                if(TextUtils.isEmpty(conPassword)){
-                    regisFragmentBinding.etRegisConPswd.setError("PLEASE ENTER CONFIRMED PASSWORD");
-                    regisFragmentBinding.etRegisConPswd.requestFocus();
-                    return;
-                }
-                if (userId != null && password != null && conPassword != null){
-                    regisThroughSharePref();
-                }
-
-                Log.d("Getting UserId and Password : ", "onClick: case R.id.btnRegister---->" + userId + "---->" + password);
-
-                break;
         }
     }
 
-    private void regisThroughSharePref() {
 
-        editor.putString(Keys.USERID, regisFragmentBinding.etRegisId.getText().toString());
-        editor.putString(Keys.PASSWORD, regisFragmentBinding.etRegisPswd.getText().toString());
-        editor.apply();
-
-        userId = sharedPreferences.getString(Keys.USERID,"");
-        password = sharedPreferences.getString(Keys.PASSWORD, "");
-
-        Toast.makeText(this, "Registered Successfully", Toast.LENGTH_SHORT).show();
-        replaceMainFrameToLoginFrag(new LoginFragment());
-
-    }
 
     private void replaceMainFrameToRegisFrag(RegisFragment regisFragment) {
         // create a FragmentManager

@@ -1,5 +1,6 @@
 package ocean.loginregisfragmentdemo;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,9 @@ import ocean.loginregisfragmentdemo.databinding.ActivityMainBinding;
 public class LoginFragment extends Fragment {
 
     View view;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    private String userId, password;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @NonNull ViewGroup container,
