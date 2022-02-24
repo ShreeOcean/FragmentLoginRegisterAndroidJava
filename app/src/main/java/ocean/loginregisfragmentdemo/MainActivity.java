@@ -18,18 +18,15 @@ import ocean.loginregisfragmentdemo.databinding.FragmentLoginBinding;
 import ocean.loginregisfragmentdemo.databinding.FragmentRegisBinding;
 import ocean.loginregisfragmentdemo.databinding.FragmentWelcomeBinding;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity{
 
     private ActivityMainBinding activityMainBinding;
-    private FragmentLoginBinding loginFragmentBinding;
-    private FragmentRegisBinding regisFragmentBinding;
-    private FragmentWelcomeBinding welcomeBinding;
-
+//    private FragmentLoginBinding loginFragmentBinding;
+//    private FragmentRegisBinding regisFragmentBinding;
+//    private FragmentWelcomeBinding welcomeBinding;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-
     String userId, password;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,45 +34,57 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(activityMainBinding.getRoot());
 
-        activityMainBinding.tvRegisLink.setOnClickListener(this);
-        activityMainBinding.btnGoToLoginFragment.setOnClickListener(this);
+//        activityMainBinding.tvRegisLink.setOnClickListener(this);
+//        activityMainBinding.btnGoToLoginFragment.setOnClickListener(this);
 
-        replaceMainFrameToLoginFrag(new LoginFragment());
-
-        sharedPreferences = getSharedPreferences("login_register", MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.btnGoToLoginFragment:
-//                activityMainBinding.tvRegisLink.setVisibility(View.VISIBLE);
-//                replaceMainFrameToLoginFrag(new LoginFragment());
-//                activityMainBinding.btnGoToLoginFragment.setVisibility(View.GONE);
-//                activityMainBinding.tvWelcomeNote.setVisibility(View.GONE);
-                break;
-            case R.id.tvRegisLink:
-                activityMainBinding.tvRegisLink.setVisibility(View.GONE);
-                replaceMainFrameToRegisFrag(new RegisFragment());
-                break;
-
+        sharedPreferences = getSharedPreferences("REGISLOGINFRAG", Context.MODE_PRIVATE);
+//        editor = sharedPreferences.edit();
+        boolean isLogin = sharedPreferences.getBoolean("isLogin",false);
+        if (isLogin){
+            replaceMainFrameToWelcomeFrag(new WelcomeFragment());
+        }else if (savedInstanceState == null){
+            replaceMainFrameToLoginFrag(new LoginFragment());
         }
+
+
+//        sharedPreferences = getSharedPreferences("login_register", MODE_PRIVATE);
+//        editor = sharedPreferences.edit();
+//        activityMainBinding.tvRegisLink.setOnClickListener(view -> {
+//            activityMainBinding.tvRegisLink.setVisibility(View.GONE);
+//            replaceMainFrameToRegisFrag(new RegisFragment());
+//        });
+
     }
 
+    private void replaceMainFrameToWelcomeFrag(WelcomeFragment welcomeFragment) {
 
-
-    private void replaceMainFrameToRegisFrag(RegisFragment regisFragment) {
         // create a FragmentManager
         FragmentManager fragmentManager = getSupportFragmentManager();
         // create a FragmentTransaction to begin the transaction and replace the Fragment
         FragmentTransaction fragTransaction = fragmentManager.beginTransaction();
         // replace the FrameLayout with new Fragment
-        fragTransaction.replace(R.id.fragment_container_main_activity, regisFragment);
+        fragTransaction.add(R.id.fragment_container_main_activity, welcomeFragment);
         // save the changes
         fragTransaction.commit();
+
     }
+//    @Override
+//    public void onClick(View view) {
+//        switch (view.getId()){
+//            case R.id.btnGoToLoginFragment:
+////                activityMainBinding.tvRegisLink.setVisibility(View.VISIBLE);
+////                replaceMainFrameToLoginFrag(new LoginFragment());
+////                activityMainBinding.btnGoToLoginFragment.setVisibility(View.GONE);
+////                activityMainBinding.tvWelcomeNote.setVisibility(View.GONE);
+//                break;
+//            case R.id.tvRegisLink:
+//                activityMainBinding.tvRegisLink.setVisibility(View.GONE);
+//                replaceMainFrameToRegisFrag(new RegisFragment());
+//                break;
+//
+//        }
+//    }
+
 
     private void replaceMainFrameToLoginFrag(LoginFragment loginFragment) {
 

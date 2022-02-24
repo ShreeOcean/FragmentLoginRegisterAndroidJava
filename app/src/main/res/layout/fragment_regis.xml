@@ -86,21 +86,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/etRegisConPswd" />
 
 
-            <TextView
-                android:id="@+id/tvGoToLoginFragment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:text="Now let's login"
-                android:textAllCaps="true"
-                android:textColor="@color/purple_500"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textAlignment="center"
-                android:layout_marginTop="30dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

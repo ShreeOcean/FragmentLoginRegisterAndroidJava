@@ -54,6 +54,18 @@
             android:textSize="@dimen/text_size"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/tvRegisLink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No Account !!!   Sign up here"
+            android:textAlignment="center"
+            android:textColor="#B388FF"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            android:clickable="true"
+            android:layout_marginTop="50dp"/>
+
     </LinearLayout>
 
 

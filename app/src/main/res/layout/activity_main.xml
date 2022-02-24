@@ -51,21 +51,6 @@
         app:layout_constraintTop_toBottomOf="@+id/tvWelcomeNote" />
 
 
-    <TextView
-        android:id="@+id/tvRegisLink"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="No Account !!!   Sign up here"
-        android:textAlignment="center"
-        android:textColor="#B388FF"
-        android:textSize="20sp"
-        android:textStyle="italic"
-        android:clickable="true"
-        android:layout_marginTop="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_container_main_activity"
-        app:layout_constraintVertical_bias="0.956" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
