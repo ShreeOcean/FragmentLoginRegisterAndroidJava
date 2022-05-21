@@ -22,8 +22,10 @@ import ocean.loginregisfragmentdemo.databinding.ActivityMainBinding;
 public class LoginFragment extends Fragment {
 
     View view;
+
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+
     private String userId, password;
     TextView tvRegisLink;
     EditText etuserId, etPassword;
@@ -67,9 +69,12 @@ public class LoginFragment extends Fragment {
                 Toast.makeText(getActivity(), "User Id or Password Doesn't Match !!!", Toast.LENGTH_SHORT).show();//.makeText(getActivity(), getString(R.string.invalid_msg), Toast.LENGTH_SHORT).show();
 
             } else {
+
+                //TODO: Shared Preference
                 editor.putBoolean("isLogin", true);
                 editor.commit();
                 Toast.makeText(getActivity(), "Login Successful", Toast.LENGTH_SHORT).show();
+
                 //welcome  fragment
                 replaceLoginToWelcomFrag(new WelcomeFragment());
             }

@@ -58,15 +58,39 @@ public class RegisFragment extends Fragment{
                 password = etPassword.getText().toString();
                 conPassword = etConPass.getText().toString();
 
-                editor.putString("userId",userId);
-                editor.putString("password",password);
-                editor.putString("conPassword",conPassword);
-                editor.putBoolean("isRegister",true);
-                editor.commit();
 
-                sharedPreferences.getString("userId","");
-                Toast.makeText(getActivity(), "Register Successful", Toast.LENGTH_SHORT).show();
-                replaceRegisFragToLoginFrag(new LoginFragment());
+                if(TextUtils.isEmpty(userId)){
+                        etRegisId.setError("PLEASE ENTER USER ID");
+                        etRegisId.requestFocus();
+                        return;
+
+                }else if(TextUtils.isEmpty(password)){
+                    etPassword.setError("PLEASE ENTER PASSWORD");
+                    etPassword.requestFocus();
+                    return;
+                } else if (!TextUtils.isEmpty(password) != !TextUtils.isEmpty(conPassword)){
+
+                    etConPass.setError("Confirm password doesn't match");
+                    etConPass.requestFocus();
+                    return;
+                }else if(TextUtils.isEmpty(conPassword)){
+                    etConPass.setError("PLEASE ENTER CONFIRMED PASSWORD");
+                    etConPass.requestFocus();
+                    return;
+                }else {
+
+                    editor.putString("userId",userId);
+                    editor.putString("password",password);
+                    editor.putString("conPassword",conPassword);
+                    editor.putBoolean("isRegister",true);
+                    editor.commit();
+
+                    sharedPreferences.getString("userId","");
+                    Toast.makeText(getActivity(), "Register Successful", Toast.LENGTH_SHORT).show();
+                    replaceRegisFragToLoginFrag(new LoginFragment());
+                }
+
+
             }
         });
 

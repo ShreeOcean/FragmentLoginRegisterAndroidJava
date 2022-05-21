@@ -34,25 +34,23 @@ public class MainActivity extends AppCompatActivity{
         activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(activityMainBinding.getRoot());
 
-//        activityMainBinding.tvRegisLink.setOnClickListener(this);
-//        activityMainBinding.btnGoToLoginFragment.setOnClickListener(this);
+
 
         sharedPreferences = getSharedPreferences("REGISLOGINFRAG", Context.MODE_PRIVATE);
-//        editor = sharedPreferences.edit();
+        editor = sharedPreferences.edit();
         boolean isLogin = sharedPreferences.getBoolean("isLogin",false);
         if (isLogin){
+
             replaceMainFrameToWelcomeFrag(new WelcomeFragment());
+
         }else if (savedInstanceState == null){
+
+            sharedPreferences.edit().putBoolean("isLogin", false).apply();
+            editor.clear();
+            editor.commit();
             replaceMainFrameToLoginFrag(new LoginFragment());
+
         }
-
-
-//        sharedPreferences = getSharedPreferences("login_register", MODE_PRIVATE);
-//        editor = sharedPreferences.edit();
-//        activityMainBinding.tvRegisLink.setOnClickListener(view -> {
-//            activityMainBinding.tvRegisLink.setVisibility(View.GONE);
-//            replaceMainFrameToRegisFrag(new RegisFragment());
-//        });
 
     }
 
@@ -68,22 +66,7 @@ public class MainActivity extends AppCompatActivity{
         fragTransaction.commit();
 
     }
-//    @Override
-//    public void onClick(View view) {
-//        switch (view.getId()){
-//            case R.id.btnGoToLoginFragment:
-////                activityMainBinding.tvRegisLink.setVisibility(View.VISIBLE);
-////                replaceMainFrameToLoginFrag(new LoginFragment());
-////                activityMainBinding.btnGoToLoginFragment.setVisibility(View.GONE);
-////                activityMainBinding.tvWelcomeNote.setVisibility(View.GONE);
-//                break;
-//            case R.id.tvRegisLink:
-//                activityMainBinding.tvRegisLink.setVisibility(View.GONE);
-//                replaceMainFrameToRegisFrag(new RegisFragment());
-//                break;
-//
-//        }
-//    }
+
 
 
     private void replaceMainFrameToLoginFrag(LoginFragment loginFragment) {

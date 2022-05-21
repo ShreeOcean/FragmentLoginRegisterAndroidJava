@@ -61,13 +61,18 @@ public class WelcomeFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.menu_logout:
-                SharedPreferences preferences = getActivity().getSharedPreferences("loginPrefs", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putBoolean("isLogin",false);
-                editor.clear();
-                editor.apply();
-                //replaceLoginToWelcomFrag(new WelcomeFragment());
+
+//                SharedPreferences preferences = getActivity().getSharedPreferences("loginPrefs", Context.MODE_PRIVATE);
+//                SharedPreferences.Editor editor = preferences.edit();
+//                editor.putBoolean("isLogin",false);
+//                editor.apply();
+//                editor.clear();
+//                editor.commit();
+                sharedPreferences.edit().putBoolean("isLogin", false).apply();
+
                 replaceWelcomeToLoginFrag(new LoginFragment());
+
+                //TODO: log out is to be done as it is not working
                 break;
         }
         return super.onOptionsItemSelected(item);
